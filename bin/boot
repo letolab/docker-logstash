@@ -8,7 +8,7 @@ set -x
 # LOGSTASH_CONFIG_URL=${LOGSTASH_CONFIG_URL:-}
 # LOGSTASH_CONFIG_FILE="/opt/logstash.conf"
 # LOGSTASH_CONFIG_FILE=$LOGSTASH_CONFIG_FILE_PATH
-LOGSTASH_CONFIG_FILE="/app/configs/logstash.conf"
+LOGSTASH_CONFIG_FILE=$LOGSTASH_CONFIG_FILE_PATH
 
 # If you don't provide a value for the LOGSTASH_CONFIG_URL env
 # var, your install will default to our very basic logstash.conf file.
@@ -16,7 +16,7 @@ LOGSTASH_CONFIG_FILE="/app/configs/logstash.conf"
 #     LOGSTASH_CONFIG_URL="https://gist.github.com/pblittle/8778567/raw/logstash.conf"
 # fi
 
-# wget $LOGSTASH_CONFIG_URL -O $LOGSTASH_CONFIG_FILE
+wget $LOGSTASH_CONFIG_URL -O $LOGSTASH_CONFIG_FILE
 
 # This magic will replace ES_HOST and ES_PORT in your logstash.conf
 # file if they exist with the IP and port dynamically generated
