@@ -1,4 +1,4 @@
-NAME = pblittle/docker-logstash
+NAME = letolab/docker-logstash
 VERSION = 0.2.0
 
 # Set the LOGSTASH_CONFIG_URL env var to your logstash.conf file.
