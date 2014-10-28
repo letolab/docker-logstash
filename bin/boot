@@ -40,8 +40,11 @@ LF_SSL_CERT_FILE="${SSL_CERT_PATH}/logstash-forwarder.crt"
 mkdir -p $SSL_CERT_PATH
 
 # Download logstash-forwarder key and certificate
-wget $LF_SSL_CERT_URL -O $LF_SSL_CERT_FILE
-wget $LF_SSL_CERT_KEY_URL -O $LF_SSL_CERT_KEY_FILE
+# wget $LF_SSL_CERT_URL -O $LF_SSL_CERT_FILE
+# wget $LF_SSL_CERT_KEY_URL -O $LF_SSL_CERT_KEY_FILE
+
+cp /app/logstash-forwarder.crt $LF_SSL_CERT_FILE
+cp /app/logstash-forwarder.key $LF_SSL_CERT_KEY_FILE
 
 # Fire up logstash!
 exec java \
