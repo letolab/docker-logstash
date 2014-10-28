@@ -7,7 +7,10 @@ set -eo pipefail
 [[ $LOGSTASH_TRACE ]] && set -x
 
 LOGSTASH_CONFIG_FILE="/opt/logstash.conf"
-cp /app/configs/logstash.conf $LOGSTASH_CONFIG_FILE
+CONFIG_PATH="/app/configs/logstash.conf"
+cp $CONFIG_PATH $LOGSTASH_CONFIG_FILE
+
+cat $LOGSTASH_CONFIG_FILE
 
 # Download default conf if none present
 if [ ! -f $LOGSTASH_CONFIG_FILE ]; then
