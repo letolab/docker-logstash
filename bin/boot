@@ -7,6 +7,7 @@ set -eo pipefail
 [[ $LOGSTASH_TRACE ]] && set -x
 
 LOGSTASH_CONFIG_FILE="/opt/logstash.conf"
+cp /app/configs/logstash.conf $LOGSTASH_CONFIG_FILE
 
 # Download default conf if none present
 if [ ! -f $LOGSTASH_CONFIG_FILE ]; then
@@ -51,8 +52,11 @@ LF_SSL_CERT_FILE="${SSL_CERT_PATH}/logstash-forwarder.crt"
 mkdir -p $SSL_CERT_PATH
 
 # Download logstash-forwarder key and certificate
-wget $LF_SSL_CERT_URL -O $LF_SSL_CERT_FILE
-wget $LF_SSL_CERT_KEY_URL -O $LF_SSL_CERT_KEY_FILE
+# wget $LF_SSL_CERT_URL -O $LF_SSL_CERT_FILE
+# wget $LF_SSL_CERT_KEY_URL -O $LF_SSL_CERT_KEY_FILE
+
+cp /app/logstash-forwarder.key $LF_SSL_CERT_KEY_FILE
+cp /app/logstash-forwarder.crt $LF_SSL_CERT_FILE
 
 # Fire up logstash!
 exec /opt/logstash/bin/logstash \
