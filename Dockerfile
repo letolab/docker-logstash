@@ -1,31 +1,35 @@
-FROM pblittle/base:0.2.2
+FROM debian:jessie
 MAINTAINER P. Barrett Little <barrett@barrettlittle.com>
 
-# Download latest package lists
-RUN apt-get update
-
-# Install dependencies
-RUN apt-get install -yq \
+# Download latest package lists & install dependencies
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -yq \
     openjdk-7-jre-headless \
     wget
 
-# Download version 1.3.3 of LogStash
-RUN cd /opt && \
-    wget https://download.elasticsearch.org/logstash/logstash/logstash-1.3.3-flatjar.jar && \
-    mv ./logstash-1.3.3-flatjar.jar ./logstash.jar
+# Download version 1.4.2 of logstash
+RUN cd /tmp && \
+    wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz && \
+    tar -xzvf ./logstash-1.4.2.tar.gz && \
+    mv ./logstash-1.4.2 /opt/logstash && \
+    rm ./logstash-1.4.2.tar.gz
+
+# Install contrib plugins
+RUN /opt/logstash/bin/plugin install contrib
 
 # Copy build files to container root
 RUN mkdir /app
 ADD . /app
 
-# Elasticsearch
+# Elasticsearch HTTP
 EXPOSE 9200
+
+# Elasticsearch transport
+EXPOSE 9300
 
 # Kibana
 EXPOSE 9292
 
-# Syslog
-EXPOSE 514
-
-# Start LogStash
+# Start logstash
 ENTRYPOINT ["/app/bin/boot"]
