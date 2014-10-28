@@ -7,7 +7,8 @@ set -x
 # logstash.conf file.
 # LOGSTASH_CONFIG_URL=${LOGSTASH_CONFIG_URL:-}
 # LOGSTASH_CONFIG_FILE="/opt/logstash.conf"
-LOGSTASH_CONFIG_FILE=$LOGSTASH_CONFIG_FILE_PATH
+# LOGSTASH_CONFIG_FILE=$LOGSTASH_CONFIG_FILE_PATH
+LOGSTASH_CONFIG_FILE="/app/configs/logstash.conf"
 
 # If you don't provide a value for the LOGSTASH_CONFIG_URL env
 # var, your install will default to our very basic logstash.conf file.
